@@ -1,10 +1,11 @@
 import '../styles/CardDisplay.css'
+import { useDuration } from '../context/DurationContext'
 
-function CardDisplay({ duration }) {
+function CardDisplay() {
+  const { duration } = useDuration()
+  const dur = Number(duration) || 3
 
-    const dur = Number(duration) || 3
-
-    return (
+  return (
         <div className="d-flex justify-content-center align-items-center">
             <div className="card mb-3 card-animated" style={{maxWidth: "18rem", animation: `colorChange ${dur}s ease-in-out infinite`}}>
                 <div className="card-body d-flex flex-column justify-content-center align-items-center">
