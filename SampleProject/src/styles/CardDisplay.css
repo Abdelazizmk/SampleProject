@@ -1,0 +1,11 @@
+@keyframes colorChange {
+    
+    0% { background-color: #4040e7;}
+    33% { background-color: #008000;}
+    66% { background-color: #ee2f2f;}
+    100% { background-color: #4040e7;}
+}
+
+.card-animated {
+    animation-fill-mode: both;
+}
