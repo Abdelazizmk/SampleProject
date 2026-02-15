@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, useState } from 'react'
+import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 
 const DurationContext = createContext(null)
 
@@ -15,7 +15,9 @@ function clampDuration(value) {
 }
 
 export function DurationProvider({ children, initialDuration = DURATION_DEFAULT }) {
-  const [duration, setDurationState] = useState(() => clampDuration(initialDuration))
+  const [duration, setDurationState] = useState(() => 
+    clampDuration(localStorage.getItem('duration') != null ? localStorage.getItem('duration') : initialDuration)
+  )
 
   const setDuration = useMemo(() => {
     return (value) => {
@@ -30,6 +32,10 @@ export function DurationProvider({ children, initialDuration = DURATION_DEFAULT 
     () => ({ duration, setDuration, min: DURATION_MIN, max: DURATION_MAX }),
     [duration, setDuration]
   )
+
+  useEffect( () => {
+    localStorage.setItem('duration', duration)
+  },[duration]);
 
   return (
     <DurationContext.Provider value={value}>
